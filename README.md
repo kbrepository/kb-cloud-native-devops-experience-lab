@@ -66,6 +66,13 @@ Implemented:
 ---
 
 ## Quick Start
+```markdown
+## Start the Complete Stack
+
+Copy the example configuration:
+
+```bash
+cp .env.example .env
 
 ### Clone Repository
 
