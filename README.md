@@ -148,12 +148,49 @@ docker stop kb-devops-api
 
 ## Documentation
 
+```markdown
+### API Documentation
+
+With the stack running, interactive API documentation is available at:
+
+- Swagger UI: `http://localhost:8000/docs`
+- ReDoc: `http://localhost:8000/redoc`
+
+#### API Usage
+
+Create a task:
+
+```bash
+curl -X POST http://localhost:8000/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Complete Docker Compose milestone"}'
+```
+
+Retrieve tasks:
+
+```bash
+curl http://localhost:8000/tasks
+```
+
+Check liveness:
+
+```bash
+curl http://localhost:8000/health
+```
+
+Check dependency readiness:
+
+```bash
+curl http://localhost:8000/ready
+```
+
 ### Architecture Decisions
 
 Located under
 
 ```
 docs/decisions/
+docs/architecture/
 ```
 
 ### Incident Reports
