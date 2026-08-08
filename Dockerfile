@@ -37,6 +37,13 @@ COPY app/ ./app/
 # ----------------------------------------------------
 RUN chown -R appuser:appgroup /app
 
+RUN mkdir -p /app/runtime \
+    && chown -R appuser:appgroup /app
+
+# RUN mkdir -p /app/runtime \
+#     && chown -R appuser:appgroup /app/runtime \
+#     && chmod 750 /app/runtime
+
 # ----------------------------------------------------
 # Switch User
 # ----------------------------------------------------

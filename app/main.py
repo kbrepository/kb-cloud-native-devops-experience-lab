@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-
+from pathlib import Path
 from fastapi import Depends, FastAPI, HTTPException, status
 from sqlalchemy import select, text
 from sqlalchemy.exc import SQLAlchemyError
@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 from app.database import Base, engine, get_db
 from app.models import Task
 from app.schemas import TaskCreate, TaskResponse
+
 
 app = FastAPI(
     title="Cloud-Native DevOps Experience Lab",
@@ -31,11 +32,24 @@ def health_check() -> dict[str, str]:
         "status": "healthy",
     }
 
+# @asynccontextmanager
+# async def lifespan(_: FastAPI):
+#     Base.metadata.create_all(bind=engine)
+#     yield
+
+RUNTIME_DIR = Path("/app/runtime")
+STARTUP_FILE = RUNTIME_DIR / "startup.txt"
+
+
 @asynccontextmanager
 async def lifespan(_: FastAPI):
+    STARTUP_FILE.write_text(
+        "Application started successfully.\n",
+        encoding="utf-8",
+    )
+
     Base.metadata.create_all(bind=engine)
     yield
-
 
 app = FastAPI(
     title="KB Cloud Native DevOps Experience Lab",
